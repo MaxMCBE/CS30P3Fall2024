@@ -21,6 +21,9 @@ public class LatinPlantNames
 	private String[] latinNames = {"ocimum", "lavandula spica", "apium", "mentha piperita", "crocus", "salvia"};
 	
 	private JFrame frame;
+	private JLabel instructionLabel;
+	private JComboBox plantNameList;
+	private JLabel outputLabel;
 
 	public static void main(String[] args) 
 	{
@@ -49,8 +52,21 @@ public class LatinPlantNames
 	private void initialize() 
 	{
 		frame = new JFrame("LatinPlantNames");
-		frame.setBounds(0, 0, 300, 250);
+		frame.setBounds(0, 0, 300, 150);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		
+		instructionLabel = new JLabel("Select a plant name:");
+		frame.getContentPane().add(instructionLabel);
+		instructionLabel.setAlignmentX(frame.getContentPane().CENTER_ALIGNMENT);
+		
+		plantNameList = new JComboBox(englishNames);
+		frame.getContentPane().add(plantNameList);
+		
+		outputLabel = new JLabel("Latin Name");
+		frame.getContentPane().add(outputLabel);
+		outputLabel.setAlignmentX(frame.getContentPane().CENTER_ALIGNMENT);
 	}
 }
