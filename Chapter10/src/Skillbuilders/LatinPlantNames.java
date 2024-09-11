@@ -17,6 +17,9 @@ Course: Computer Science 30
 
 public class LatinPlantNames 
 {
+	private String[] englishNames = {"basil", "lavender", "parsley", "peppermint", "saffron", "sage"};
+	private String[] latinNames = {"ocimum", "lavandula spica", "apium", "mentha piperita", "crocus", "salvia"};
+	
 	private JFrame frame;
 
 	public static void main(String[] args) 
@@ -45,8 +48,9 @@ public class LatinPlantNames
 
 	private void initialize() 
 	{
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame = new JFrame("LatinPlantNames");
+		frame.setBounds(0, 0, 300, 250);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
