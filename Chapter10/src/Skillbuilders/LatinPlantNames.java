@@ -2,10 +2,13 @@ package Skillbuilders;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.awt.event.ActionEvent;
 
 /*
 
-Program: LatinPlantNames.java          Last Date of this Revision: September 11, 2024
+Program: LatinPlantNames.java          Last Date of this Revision: September 12, 2024
 
 Purpose: Returns the Latin name of a selected plant
 
@@ -22,7 +25,7 @@ public class LatinPlantNames
 	
 	private JFrame frame;
 	private JLabel instructionLabel;
-	private JComboBox plantNameList;
+	private JComboBox<String> plantNameList;
 	private JLabel outputLabel;
 
 	public static void main(String[] args) 
@@ -52,7 +55,7 @@ public class LatinPlantNames
 	private void initialize() 
 	{
 		frame = new JFrame("LatinPlantNames");
-		frame.setBounds(0, 0, 300, 150);
+		frame.setBounds(0, 0, 300, 125);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -60,13 +63,20 @@ public class LatinPlantNames
 		
 		instructionLabel = new JLabel("Select a plant name:");
 		frame.getContentPane().add(instructionLabel);
-		instructionLabel.setAlignmentX(frame.getContentPane().CENTER_ALIGNMENT);
+		instructionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		plantNameList = new JComboBox(englishNames);
+		plantNameList = new JComboBox<>(englishNames);
+		plantNameList.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				outputLabel.setText("Latin name: " + latinNames[Arrays.asList(englishNames).indexOf((String)plantNameList.getSelectedItem())]);
+			}
+		});
 		frame.getContentPane().add(plantNameList);
 		
-		outputLabel = new JLabel("Latin Name");
+		outputLabel = new JLabel("Latin name: ocimum");
 		frame.getContentPane().add(outputLabel);
-		outputLabel.setAlignmentX(frame.getContentPane().CENTER_ALIGNMENT);
+		outputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 	}
 }
