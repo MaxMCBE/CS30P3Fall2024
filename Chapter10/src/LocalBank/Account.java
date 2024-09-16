@@ -1,17 +1,21 @@
 package LocalBank;
 
+//Imports
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
 
 public class Account 
 {
+	//DecimalFormat object to return balance
 	private DecimalFormat dc = new DecimalFormat("0.00");
 	
+	//Account data variables
 	public double balance;
 	public String id;
 	private String fName;
 	private String lName;
 	
+	//Constructor, assigns all variables a value from parameters
 	public Account(String i, double b, String f, String l)
 	{
 		id = i;
@@ -20,16 +24,19 @@ public class Account
 		lName = l;
 	}
 	
+	//Return the full name of the account owner
 	public String getName()
 	{
 		return fName + " " + lName;
 	}
 	
+	//Return the formatted balance
 	public String getBalance()
 	{
 		return ("Current balance: $" + dc.format(balance));
 	}
 	
+	//Add money to account and output success
 	public void deposit(double amount)
 	{
 		balance += amount;
@@ -38,26 +45,16 @@ public class Account
 	
 	public void withdraw(double amount)
 	{
-		if (amount <= balance)
+		if (amount <= balance) //If withdrawal amount is valid
 		{
-			balance -= amount;
+			balance -= amount; //Remove money from account
+			//Output success
 			JOptionPane.showMessageDialog(null, "$"+ dc.format(amount) + " withdrawn from account with ID '" + id + "' \nBalance: $" + dc.format(balance), "Withdrawal Successful", JOptionPane.INFORMATION_MESSAGE);
 		}
-		else
+		else //If withdrawal account is invalid
 		{
+			//Output balance and invalid requested amount
 			JOptionPane.showMessageDialog(null, "Not enough money in account with ID '" + id + "' \nBalance: $" + dc.format(balance) + "\nRequested amount: $" + dc.format(amount), "Insufficient Balance", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-	
-	public boolean equals(Account account)
-	{
-		if (id.equals(account.id))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
 		}
 	}
 }
