@@ -33,7 +33,7 @@ public class Account
 	public void deposit(double amount)
 	{
 		balance += amount;
-		JOptionPane.showMessageDialog(null, "$"+ dc.format(amount) + " deposited. Balance: $" + dc.format(balance), "Deposit Successful", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "$"+ dc.format(amount) + " deposited into account with ID '" + id + "' \nBalance: $" + dc.format(balance), "Deposit Successful", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void withdraw(double amount)
@@ -41,11 +41,11 @@ public class Account
 		if (amount <= balance)
 		{
 			balance -= amount;
-			JOptionPane.showMessageDialog(null, "$"+ dc.format(amount) + " withdrawn. Balance: $" + dc.format(balance), "Withdrawal Successful", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "$"+ dc.format(amount) + " withdrawn from account with ID '" + id + "' \nBalance: $" + dc.format(balance), "Withdrawal Successful", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Not enough money in account. Balance: $" + dc.format(balance) + ", Requested amount: $" + dc.format(amount), "Insufficient Balance", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Not enough money in account with ID '" + id + "' \nBalance: $" + dc.format(balance) + "\nRequested amount: $" + dc.format(amount), "Insufficient Balance", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
