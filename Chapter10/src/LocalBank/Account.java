@@ -4,6 +4,18 @@ package LocalBank;
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
 
+/*
+
+Program: Account.java          Last Date of this Revision: September 16, 2024
+
+Purpose: Object that contains and manages individual account data for Bank.java and by extension LocalBank.java
+
+Author: Max MacPhee 
+School: CHHS
+Course: Computer Science 30
+ 
+*/
+
 public class Account 
 {
 	//DecimalFormat object to return balance

@@ -1,8 +1,21 @@
 package LocalBank;
 
+//Imports
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+
+/*
+
+Program: LocalBank.java          Last Date of this Revision: September 16, 2024
+
+Purpose: Creates and manages GUI using Bank.java and Account.java to make a basic bank manager interface
+
+Author: Max MacPhee 
+School: CHHS
+Course: Computer Science 30
+ 
+*/
 
 public class LocalBank 
 {
