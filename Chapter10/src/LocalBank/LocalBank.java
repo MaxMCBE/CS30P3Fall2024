@@ -17,6 +17,8 @@ Course: Computer Science 30
  
 */
 
+//Notes for Max tomorrow: add PIN, other geographical info from textbook review assignment
+
 public class LocalBank 
 {
 	private Bank bank = new Bank();
