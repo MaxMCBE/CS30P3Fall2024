@@ -25,6 +25,11 @@ public class Account
 		return fName + " " + lName;
 	}
 	
+	public String getBalance()
+	{
+		return ("Current balance: $" + dc.format(balance));
+	}
+	
 	public void deposit(double amount)
 	{
 		balance += amount;
