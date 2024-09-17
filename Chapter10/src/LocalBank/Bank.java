@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /*
 
-Program: Bank.java          Last Date of this Revision: September 16, 2024
+Program: Bank.java          Last Date of this Revision: September 17, 2024
 
 Purpose: Object that contains and manages a HashMap of bank accounts for use with LocalBank.java and Account.java
 
@@ -28,9 +28,10 @@ public class Bank
 	}
 	
 	//Create a new account with data equal to parameters and output success
-	public void addAccount(String id, double balance, String fName, String lName)
+	public void addAccount(String id, int pin, String fName, String lName, String street, String city, String province, String zip, double balance)
 	{
-		accounts.put(id, new Account(id, balance, fName, lName));
+		//This is a disgusting number of parameters, but I didn't really want to use an array for this and the textbook specifies the address data
+		accounts.put(id, new Account(id, pin, fName, lName, street, city, province, zip, balance));
 		JOptionPane.showMessageDialog(null, "Account successfully created with ID: '" + accounts.get(id).id +"'", "Account Creation Successful", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
