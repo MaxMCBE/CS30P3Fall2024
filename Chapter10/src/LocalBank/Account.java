@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 /*
 
-Program: Account.java          Last Date of this Revision: September 17, 2024
+Program: Account.java          Last Date of this Revision: September 18, 2024
 
 Purpose: Object that contains and manages individual account data for Bank.java and by extension LocalBank.java
 
@@ -68,12 +68,13 @@ public class Account
 	}
 	
 	//Method that allows the user to change the account PIN, taking the current and new PIN as parameters
-	public void changePin(int currentPin, int newPin)
+	public void changePin(int newPin)
 	{
 		if (Integer.toString(newPin).length() == 4) //If the new PIN is a 4 digit number
 		{
+			int oldPin = pin;
 			pin = newPin; //Set new PIN and output results (censored because that is usually done with passwords and I thought it'd be good to refresh my knowledge of string manipulation)
-			JOptionPane.showMessageDialog(null, "PIN changed from '" + Integer.toString(currentPin).charAt(0) + "***' to '" + Integer.toString(newPin).charAt(0) +"***' successfully", "PIN Change Successful", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "PIN changed from '" + Integer.toString(oldPin).charAt(0) + "***' to '" + Integer.toString(newPin).charAt(0) +"***' successfully", "PIN Change Successful", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else //If the new PIN is NOT a 4 digit number
 		{
