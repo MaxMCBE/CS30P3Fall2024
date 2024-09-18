@@ -418,35 +418,36 @@ public class LocalBank
 		pinButton.setEnabled(false);
 		accountWindow.add(pinButton);
 		
+		//Button to delete account
 		deleteButton = new JButton("Delete account");
 		deleteButton.addActionListener(new ActionListener() 
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e) //On click
 			{
-				if (JOptionPane.showConfirmDialog(null, 
-						"Are you sure you want to delete account with ID '" + selectedAccount.id + "'? This can NOT be undone!", "Account Deletion Confirmation", JOptionPane.YES_NO_OPTION)
-						== JOptionPane.YES_OPTION)
+				//Get confirmation to delete account
+				int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete account with ID '" + selectedAccount.id + "'? This can NOT be undone!", "Account Deletion Confirmation", JOptionPane.YES_NO_OPTION);
+				if (confirm == JOptionPane.OK_OPTION) //If confirmed
 				{
-					try
+					try //If PIN input cannot be turned into an integer, catch the exception
 					{
-						int pin = Integer.parseInt(JOptionPane.showInputDialog("Confirm PIN:"));
-						if (selectedAccount.checkPin(pin))
+						int pin = Integer.parseInt(JOptionPane.showInputDialog("Confirm PIN:")); //Get input for the PIN as verification
+						if (selectedAccount.checkPin(pin)) //If the PIN is correct
 						{
-							bank.deleteAccount(selectedAccount.id); //Includes output
-							selectedAccount = null;
-							update();
+							bank.deleteAccount(selectedAccount.id); //Delete account (Includes output)
+							selectedAccount = null; //Set selectedAccount to null
+							update(); //Update GUI
 						}
-						else
+						else //If the PIN is incorrect
 						{
-							throw new Exception();
+							throw new Exception(); //Throw an exception
 						}
 					}
-					catch (Exception invalidPIN)
+					catch (Exception invalidPIN) //If PIN cannot be turned into a number or is incorrect
 					{
 						JOptionPane.showMessageDialog(null, "Invalid PIN", "Credential Error", JOptionPane.ERROR_MESSAGE); //Error message
 					}
 				}
-				else
+				else //If not confirmed, output that the account was not deleted
 				{
 					JOptionPane.showMessageDialog(null, "Account with ID: '" + selectedAccount.id +"' deletion cancelled", "Account Deletion Cancelled", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -458,19 +459,21 @@ public class LocalBank
 		accountWindow.add(deleteButton);
 	}
 	
+	//Method to update the GUI values all at once (So that each button doesn't need to update specific GUIs, as this is more reliable and easier to modify
 	private void update()
 	{
-		if (bank.accounts.size() > 0)
+		if (bank.accounts.size() > 0) //If there are existing bank accounts
 		{
-			viewAccount.setEnabled(true);
+			viewAccount.setEnabled(true); //Set view account button to enabled
 		}
-		else
+		else //If there are no existing accounts
 		{
-			viewAccount.setEnabled(false);
+			viewAccount.setEnabled(false); //Disabled view account button
 		}
 		
-		if (selectedAccount != null)
+		if (selectedAccount != null) //If there is a selected account
 		{
+			//Enable account window buttons and labels, and fill out variable text
 			idLabel.setEnabled(true);
 			idLabel.setText("Selected account ID: " + selectedAccount.id);
 			
@@ -490,8 +493,9 @@ public class LocalBank
 			pinButton.setEnabled(true);
 			deleteButton.setEnabled(true);
 		}
-		else
+		else //If there is no selected account
 		{
+			//Disable account window buttons and labels, and reset to placeholder text
 			idLabel.setEnabled(false);
 			idLabel.setText("Selected account ID: No account selected");
 			
@@ -513,3 +517,4 @@ public class LocalBank
 		}
 	}
 }
+//Bit longer than I intended
