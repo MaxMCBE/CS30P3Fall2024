@@ -106,7 +106,7 @@ public class MyFile
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				String input = JOptionPane.showInputDialog(null, "Enter name of file to create, including file extension:");
+				String input = JOptionPane.showInputDialog(null, "Enter name of file to delete, including file extension:");
 				
 				selectedFile = new File("src//MyFile//" + input);
 				
