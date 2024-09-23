@@ -4,6 +4,18 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 
+/*
+
+Program: Assignment.java          Last Date of this Revision: September 19, 2024
+
+Purpose: Outputs instructions from a text file
+
+Author: Max MacPhee 
+School: CHHS
+Course: Computer Science 30
+ 
+*/
+
 public class Assignment 
 {
 	private JFrame frame;

@@ -5,6 +5,18 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
+/*
+
+Program: Stats.java          Last Date of this Revision: September 23, 2024
+
+Purpose: Program that gathers test result input for a group of students, which it can then output
+
+Author: Max MacPhee 
+School: CHHS
+Course: Computer Science 30
+ 
+*/
+
 public class Stats 
 {
 	private int students = 0; //Number of students

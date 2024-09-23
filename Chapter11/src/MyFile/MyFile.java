@@ -6,6 +6,18 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 
+/*
+
+Program: MyFile.java          Last Date of this Revision: September 19, 2024
+
+Purpose: Checks to see if a file exists and then outputs results
+
+Author: Max MacPhee 
+School: CHHS
+Course: Computer Science 30
+ 
+*/
+
 public class MyFile 
 {
 
