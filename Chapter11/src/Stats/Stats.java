@@ -3,14 +3,14 @@ package Stats;
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 public class Stats 
 {
-	private int students = 0;
-	private final int EXTRA = 3;
+	private int students = 0; //Number of students
+	private final int EXTRA = 3; //Extra lines of data after student data
 	
+	//GUI elements
 	private JFrame frame;
 	private JScrollPane scrollPane;
 	private JPanel panel;
@@ -21,13 +21,13 @@ public class Stats
 
 	public static void main(String[] args) 
 	{
-		EventQueue.invokeLater(new Runnable() 
+		EventQueue.invokeLater(new Runnable() //Create thread
 		{
-			public void run() 
+			public void run() //Run
 			{
-				try 
+				try
 				{
-					Stats window = new Stats();
+					Stats window = new Stats(); //Create a Stats GUI
 					window.frame.setVisible(true);
 				} 
 				catch (Exception e) 
@@ -38,130 +38,128 @@ public class Stats
 		});
 	}
 
-	public Stats()
+	public Stats() //Constructor
 	{
-		initialize();
+		initialize(); //Run initialize()
 	}
 
 	private void initialize() 
 	{
+		//Frame
 		frame = new JFrame("Stats");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setLocationRelativeTo(null);
 		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); //Create border
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//ScrollPane (to fit lots of file data on the window)
 		scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane);
 		
+		//Panel for main scrollPane view
 		panel = new JPanel();
 		scrollPane.setViewportView(panel);
-		panel.setLayout(new GridLayout(0, 1, 15, 15));
+		panel.setLayout(new GridLayout(0, 1, 15, 15)); //1 column, indefinite rows
 		
+		//scrollPane header
 		header = new JPanel();
 		header.setBackground(new Color(255, 255, 255));
 		scrollPane.setColumnHeaderView(header);
-		header.setLayout(new GridLayout(0, 2, 15, 15));
+		header.setLayout(new GridLayout(0, 2, 15, 15)); //2 columns, indefinite rows
 		
+		//Button to autofill data
 		generateButton = new JButton("Generate random data");
 		generateButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				autofill();
-				read();
+				autofill(); //Autofill data file
+				read(); //Read and output data file
 			}
 		});
 		header.add(generateButton);
 		
+		//Button to input data
 		inputButton = new JButton("Input students and grades");
 		inputButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				input();
-				read();
+				input(); //Get input and write it into data file
+				read(); //Read and output data file
 			}
 		});
 		header.add(inputButton);
 	}
 	
-	private void read()
+	private void read() //Read and output data file
 	{
-		FileReader in;
-		BufferedReader readFile;
-		
 		try
 		{
 			//Clear old data
-			panel.removeAll();
-			if (header.getComponentCount() == 2+EXTRA)
+			panel.removeAll(); //Clear panel
+			if (header.getComponentCount() == 2+EXTRA) //If the header is filled 
 			{
-				for (int i = EXTRA; i > 0; i--)
+				for (int i = EXTRA; i > 0; i--) //Loop through extra elements
 				{
-					header.remove(2+i-1);
+					header.remove(2+i-1); //Remove them (This math is not simplified but 2 (buttons) + i (extra element) - 1 (to get index) makes more sense to read in my opinion than 1 + i)
 				}
 			}
 			
 			//Create reader
-			in = new FileReader(test);
-			readFile = new BufferedReader(in);
+			BufferedReader in = new BufferedReader(new FileReader(test)); //I chose to define the FileReader inside the BufferedReader as it felt redundant to separate it. Please correct me if there is an important reason to separate this out 
 			
 			//For requested students
 			for (int i = 1; i <= students; i++)
 			{
 				JLabel label = new JLabel();
-				label.setText(readFile.readLine() + ": " + readFile.readLine()); //Add a label with text "Name: score" to the scroll panel
+				label.setText(in.readLine() + ": " + in.readLine()); //Add a label with text "Name: score" to the scroll panel
 				panel.add(label);
 			}
 			//Add extra data from the end
 			for (int i = 1; i <= EXTRA; i++)
 			{
 				JLabel label = new JLabel();
-				label.setText(readFile.readLine());
+				label.setText(in.readLine());
 				header.add(label); //Add these to the header
 			}
 			
 			//Close
 			in.close();
-			readFile.close();
 			
-			frame.repaint();
+			frame.repaint(); //Rebuild the GUI so the user doesn't need to update it by scrolling/etc
 			frame.revalidate();
 		}
-		catch (IOException e)
+		catch (IOException e) //Catch exception
 		{
-			JOptionPane.showMessageDialog(null, "Problem reading file", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Problem reading file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
 		}
 	}
 	
-	private void resetFile()
+	private void resetFile() //Reset data file
 	{
-		try
+		try //Try
 		{
-			test = new File("src//Stats//test.dat");
-			if (test.exists())
+			test = new File("src//Stats//test.dat"); //Create a File object with the desired path
+			if (test.exists()) //If it exists, delete it
 			{
 				test.delete();
 			}
+			//Create a fresh, blank file at the desired path
 			test.createNewFile();
 		}
-		catch (Exception e)
+		catch (IOException e) //Catch
 		{
-			JOptionPane.showMessageDialog(null, "Problem resetting file", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Problem resetting file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
 		}
 	}
 	
-	private void input()
+	private void input() //Get user input and add it to the file
 	{
-		//File for test
+		//Data file
 		test = new File("src//Stats//test.dat");
-		resetFile();
-				
-		//Create writer
-		FileWriter out;
-		BufferedWriter writeFile;
-				
+		resetFile(); //Reset data (it will be overwritten anyways, but this prevents line 54 from remaining unchanged when going from 100 to 50 students)
+		
 		//Variables for current name and score
 		String name;
 		double score;
@@ -175,17 +173,17 @@ public class Stats
 		
 		try
 		{
-			out = new FileWriter(test);
-			writeFile = new BufferedWriter(out);
+			BufferedWriter out = new BufferedWriter(new FileWriter(test)); //Same note as read()
 			
+			//Get input for number of students
 			students = Integer.parseInt(JOptionPane.showInputDialog(null, "How many students would you like to enter grades for?", "Student Input", JOptionPane.QUESTION_MESSAGE));
 			
-			for (int i = 1; i <= students; i++)
+			for (int i = 1; i <= students; i++) //For each student
 			{
-				name = JOptionPane.showInputDialog(null, "Please enter the name of student #" + i + ":", "Input", JOptionPane.QUESTION_MESSAGE);
-				score = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the score of student #" + i + ":", "Input", JOptionPane.QUESTION_MESSAGE));
+				name = JOptionPane.showInputDialog(null, "Please enter the name of student #" + i + ":", "Input", JOptionPane.QUESTION_MESSAGE); //Get input for the name of the student
+				score = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the score of student " + name + ":", "Input", JOptionPane.QUESTION_MESSAGE)); //Get input for the score of the student
 				
-				totalScore += score;
+				totalScore += score; //Add the score to the total
 				
 				//Replace high and low if necessary
 				if (score > topScore)
@@ -200,41 +198,36 @@ public class Stats
 				}
 				
 				//Add name and score to file
-				writeFile.write(name);
-				writeFile.newLine();
-				writeFile.write(String.valueOf(score));
-				writeFile.newLine();
+				out.write(name);
+				out.newLine();
+				out.write(String.valueOf(score));
+				out.newLine();
 			}
 			
 			//The EXTRA lines
-			writeFile.write("Top: " + topName + " with " + String.valueOf(topScore));
-			writeFile.newLine();
+			out.write("Top: " + topName + " with " + String.valueOf(topScore)); //Add top score and name
+			out.newLine();
 			
-			writeFile.write("Bottom: " + bottomName + " with " + String.valueOf(bottomScore));
-			writeFile.newLine();
+			out.write("Bottom: " + bottomName + " with " + String.valueOf(bottomScore)); //Add bottom score and name
+			out.newLine();
 			
 			double avg = Math.round(totalScore / students);
-			writeFile.write("Average: " + String.valueOf(avg));
+			out.write("Average: " + String.valueOf(avg)); //Add average
 			
 			//Close
-			writeFile.close();
 			out.close();
 		}
-		catch (Exception e)
+		catch (Exception e) //Catch exceptions (IOException or data types)
 		{
-			JOptionPane.showMessageDialog(null, "Something went wrong, please try again", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Something went wrong, please try again", "Error", JOptionPane.ERROR_MESSAGE); //Error message
 		}
 	}
 
-	private void autofill()
+	private void autofill() //Autofill random student data (for testing)
 	{
-		//File for test
+		//Data file
 		test = new File("src//Stats//test.dat");
 		resetFile();
-		
-		//Create writer
-		FileWriter out;
-		BufferedWriter writeFile;
 		
 		//Variables for current name and score
 		String name;
@@ -248,17 +241,18 @@ public class Stats
 		double bottomScore = 100;
 		String bottomName = "";
 		
-		try
+		try //To catch exceptions
 		{
+			//Get input for number of students
 			students = Integer.parseInt(JOptionPane.showInputDialog(null, "How many students would you like to generate grades for?", "Student Input", JOptionPane.QUESTION_MESSAGE));
+
+			//Create writer
+			BufferedWriter out = new BufferedWriter(new FileWriter(test)); //Same note as read()
 			
-			out = new FileWriter(test);
-			writeFile = new BufferedWriter(out);
-			
-			for (int i = 1; i <= students; i++)
+			for (int i = 1; i <= students; i++) //For each student
 			{
 				name = "Student " + i; //Set name to student number
-				score = Math.round(Math.random()*100); //Generate a random score
+				score = Math.round(Math.random()*100); //Generate a random score (0 to 100)
 				totalScore += score; //Add score to total
 				
 				//Replace high and low if necessary
@@ -273,30 +267,29 @@ public class Stats
 					bottomScore = score;
 				}
 				
-				//Add name and score to file
-				writeFile.write(name);
-				writeFile.newLine();
-				writeFile.write(String.valueOf(score));
-				writeFile.newLine();
+				//Add name and score to file on 2 lines
+				out.write(name);
+				out.newLine();
+				out.write(String.valueOf(score));
+				out.newLine();
 			}
 			
 			//The EXTRA lines
-			writeFile.write("Top: " + topName + " with " + String.valueOf(topScore));
-			writeFile.newLine();
+			out.write("Top: " + topName + " with " + String.valueOf(topScore)); //Add top score
+			out.newLine();
 			
-			writeFile.write("Bottom: " + bottomName + " with " + String.valueOf(bottomScore));
-			writeFile.newLine();
+			out.write("Bottom: " + bottomName + " with " + String.valueOf(bottomScore)); //Add bottom score
+			out.newLine();
 			
-			double avg = Math.round(totalScore / students);
-			writeFile.write("Average: " + String.valueOf(avg));
+			double avg = Math.round(totalScore / students); //Add average
+			out.write("Average: " + String.valueOf(avg));
 			
 			//Close
-			writeFile.close();
 			out.close();
 		}
-		catch (Exception e)
+		catch (Exception e) //Catch exceptions (IOException or data types)
 		{
-			JOptionPane.showMessageDialog(null, "Something went wrong, please try again", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Something went wrong, please try again", "Error", JOptionPane.ERROR_MESSAGE); //Error message
 		}
 	}
 }
