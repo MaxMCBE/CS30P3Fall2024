@@ -20,7 +20,7 @@ Course: Computer Science 30
 
 public class WordCount 
 {
-	//GUI element definitions
+	//GUI element definitions (No unnecessary ones this time)
 	private JFrame frame;
 	private JTextField filePathInput;
 	private JButton countButton;
