@@ -74,6 +74,7 @@ public class WordCount
 		frame.setBounds(100, 100, 450, 300);
 		frame.setLocationRelativeTo(null); //Center on screen
 		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); //Create border
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Create a main content panel with a vertical single column grid layout
 		JPanel panel = new JPanel();
