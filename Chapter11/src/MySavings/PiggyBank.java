@@ -1,5 +1,8 @@
 package MySavings;
 
+import javax.swing.JOptionPane;
+import java.text.DecimalFormat;
+
 /*
 
 Program: PiggyBank.java          Last Date of this Revision: September 26, 2024
@@ -14,6 +17,8 @@ Course: Computer Science 30
 
 public class PiggyBank 
 {
+	DecimalFormat dc = new DecimalFormat("0.00");
+	
 	//Coin variables
 	private int pennies;
 	private int nickels;
@@ -66,38 +71,55 @@ public class PiggyBank
 	}
 	
 	/*
-	 * Withdraws a requested amount of money from the piggy bank using the largest possible coins
-	 * @param amount total balance of money to withdraw
+	 * Withdraws specific requested coins from the bank
+	 * @param p number of pennies to withdraw
+	 * @param n number of nickels to withdraw
+	 * @param d number of dimes to withdraw
+	 * @param q number of quarters to withdraw
 	 */
-	public void withdraw(double amount) 
+	public void withdraw(int p, int n, int d, int q)
 	{
-		//Exact same code as deposit() but it increments the coin type down instead of up
-		while (amount > 0)
+		try //If it cannot withdraw the requested coins it will throw an exception
 		{
-			if (amount >= 0.25)
+			if (pennies >= p) //If enough pennies exist
 			{
-				quarters--;
-				amount -= 0.25;
+				pennies -= p; //Remove the pennies
 			}
-			else if (amount >= 0.10)
+			else //If they do not exist
 			{
-				dimes--;
-				amount -= 0.10;
+				throw new Exception(); //Throw exception
 			}
-			else if (amount >= 0.05)
+			//Repeat for other coin types
+			if (nickels >= n)
 			{
-				nickels--;
-				amount -= 0.05;
-			}
-			else if (amount >= 0.01)
-			{
-				pennies--;
-				amount -= 0.01;
+				nickels -= n;
 			}
 			else
 			{
-				amount = 0;
+				throw new Exception();
 			}
+			
+			if (dimes >= d)
+			{
+				dimes -= d;
+			}
+			else
+			{
+				throw new Exception();
+			}
+				
+			if (quarters >= q)
+			{
+				quarters -= q;
+			}
+			else
+			{
+				throw new Exception();
+			}
+		}
+		catch (Exception e) //Catch thrown exceptions
+		{
+			JOptionPane.showMessageDialog(null, "Not enough coins in the piggy bank", "Insufficient balance", JOptionPane.ERROR_MESSAGE); //Error message
 		}
 	}
 	
@@ -114,8 +136,8 @@ public class PiggyBank
 	 * Returns the amount of money in the bank
 	 * @return a double value calculated by adding the value of all coins in the bank
 	 */
-	public double returnAmount()
+	public String returnAmount()
 	{
-		return ((0.25 * quarters) + (0.1 * dimes) + (0.05 * nickels) + (0.01 * pennies));
+		return dc.format((0.25 * quarters) + (0.1 * dimes) + (0.05 * nickels) + (0.01 * pennies));
 	}
 }
