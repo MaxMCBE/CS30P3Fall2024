@@ -1,6 +1,7 @@
 package MySavings;
 
 import javax.swing.JOptionPane;
+import java.io.*;
 import java.text.DecimalFormat;
 
 /*
@@ -16,7 +17,11 @@ Course: Computer Science 30
 */
 
 public class PiggyBank 
-{
+{	
+	//File to use for data storage
+	File bankFile;
+	
+	//DecimalFormat object
 	DecimalFormat dc = new DecimalFormat("0.00");
 	
 	//Coin variables
@@ -33,6 +38,94 @@ public class PiggyBank
 		nickels = 0;
 		dimes = 0;
 		quarters = 0;
+	}
+	
+	/*
+	 * Tests to see if a given file exists
+	 * @param path file path of the desired file
+	 * @return true if the file exists, false if the file does not exist
+	 */
+	public boolean getFile(String path)
+	{
+		bankFile = new File(path); //Assign the source object to a file at the inputted path
+		
+		if (bankFile.exists()) //If it exists
+		{
+			return true; //Return true, and the program continues running
+		}
+		else //If it does not exist
+		{
+			//Output an error message
+			JOptionPane.showMessageDialog(null, "File with path '" + path + "' could not be found", "File not found", JOptionPane.ERROR_MESSAGE); //Error message
+			return false; //Return false (the program will not continue running)
+		}
+	}
+	
+	public void read(String path)
+	{
+		String line;
+		int i = 0;
+		
+		if (getFile(path))
+		{
+			try
+			{
+				BufferedReader in = new BufferedReader(new FileReader(bankFile));
+				
+				while ((line = in.readLine()) != null)
+				{
+					if (i == 0)
+					{
+						pennies = Integer.parseInt(line);
+					}
+					else if (i == 1)
+					{
+						nickels = Integer.parseInt(line);
+					}
+					else if (i == 2)
+					{
+						dimes = Integer.parseInt(line);
+					}
+					else if (i == 3)
+					{
+						quarters = Integer.parseInt(line);
+					}
+					
+					i++;
+				}
+				
+				in.close();
+			}
+			catch (Exception e)
+			{
+				JOptionPane.showMessageDialog(null, "An error occured while reading the file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
+			}
+		}
+	}
+	
+	public void write(String path)
+	{
+		if (getFile(path))
+		{
+			try
+			{
+				BufferedWriter out = new BufferedWriter(new FileWriter(bankFile));
+				
+				out.write(Integer.toString(pennies));
+				out.newLine();
+				out.write(Integer.toString(nickels));
+				out.newLine();
+				out.write(Integer.toString(dimes));
+				out.newLine();
+				out.write(Integer.toString(quarters));
+				
+				out.close();
+			}
+			catch (IOException e)
+			{
+				JOptionPane.showMessageDialog(null, "An error occured while reading the file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
+			}
+		}
 	}
 	
 	/*
@@ -127,9 +220,10 @@ public class PiggyBank
 	 * Returns the number of each type of coin in the bank
 	 * @return a string containing the number of each coin type
 	 */
-	public String returnCoins()
+	public int[] returnCoins()
 	{
-		return "Quarters: " + quarters + ", Dimes: " + dimes + ", Nickels: " + nickels + ", Pennies: " + pennies;
+		int[] coins = {pennies, nickels, dimes, quarters};
+		return coins;
 	}
 	
 	/*
