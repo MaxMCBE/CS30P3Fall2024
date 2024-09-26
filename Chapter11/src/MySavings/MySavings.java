@@ -228,6 +228,32 @@ public class MySavings
 		frame.getContentPane().add(depositCustom);
 		
 		JButton withdrawCustom = new JButton("Withdraw custom amount");
+		withdrawCustom.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				int pennies;
+				int nickels;
+				int dimes;
+				int quarters;
+				
+				try
+				{
+					pennies = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter number of pennies to withdraw:", "Input", JOptionPane.QUESTION_MESSAGE));
+					nickels = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter number of nickels to withdraw:", "Input", JOptionPane.QUESTION_MESSAGE));
+					dimes = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter number of dimes to withdraw:", "Input", JOptionPane.QUESTION_MESSAGE));
+					quarters = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter number of quarters to withdraw:", "Input", JOptionPane.QUESTION_MESSAGE));
+					
+					bank.withdraw(pennies, nickels, dimes, quarters);
+				}
+				catch (Exception e1)
+				{
+					JOptionPane.showMessageDialog(null, "Please enter a number", "Input error", JOptionPane.ERROR_MESSAGE); //Error message
+				}
+				
+				update();
+			}
+		});
 		withdrawCustom.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		frame.getContentPane().add(withdrawCustom);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

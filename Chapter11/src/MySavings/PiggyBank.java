@@ -1,5 +1,6 @@
 package MySavings;
 
+//Imports
 import javax.swing.JOptionPane;
 import java.io.*;
 import java.text.DecimalFormat;
@@ -20,6 +21,13 @@ public class PiggyBank
 {	
 	//File to use for data storage
 	File bankFile;
+	/**
+	 * File should look like:
+	 * PENNIES_VALUE
+	 * NICKELS_VALUE
+	 * DIMES_VALUE
+	 * QUARTERS_VALUE
+	 */
 	
 	//DecimalFormat object
 	DecimalFormat dc = new DecimalFormat("0.00");
@@ -61,48 +69,55 @@ public class PiggyBank
 		}
 	}
 	
+	/*
+	 * Reads a file at a given path for piggy bank data
+	 * @param path of file to read
+	 */
 	public void read(String path)
 	{
-		String line;
-		int i = 0;
-		
-		if (getFile(path))
+		if (getFile(path)) //If file exists
 		{
-			try
+			try //Catch exceptions from the reader or from parseInt
 			{
-				BufferedReader in = new BufferedReader(new FileReader(bankFile));
+				String line; //Current line
+				int i = 0; //Index of current line
+				BufferedReader in = new BufferedReader(new FileReader(bankFile)); //Create a reader
 				
-				while ((line = in.readLine()) != null)
+				while ((line = in.readLine()) != null) //While it can read a new line
 				{
-					if (i == 0)
+					if (i == 0) //If the line index is 0
 					{
-						pennies = Integer.parseInt(line);
+						pennies = Integer.parseInt(line); //Set number of pennies to value on line
 					}
-					else if (i == 1)
+					else if (i == 1) //If the line index is 1
 					{
-						nickels = Integer.parseInt(line);
+						nickels = Integer.parseInt(line); //Set number of nickels to value on line
 					}
-					else if (i == 2)
+					else if (i == 2) //If the line index is 2
 					{
-						dimes = Integer.parseInt(line);
+						dimes = Integer.parseInt(line); //Set number of dimes to value on line
 					}
-					else if (i == 3)
+					else if (i == 3) //If the line index is 3
 					{
-						quarters = Integer.parseInt(line);
+						quarters = Integer.parseInt(line); //Set number of quarters to value on line
 					}
 					
-					i++;
+					i++; //Increment index
 				}
 				
-				in.close();
+				in.close(); //Close reader stream
 			}
-			catch (Exception e)
+			catch (Exception e) //If an exception is thrown (not found file, parseInt failed, etc)
 			{
 				JOptionPane.showMessageDialog(null, "An error occured while reading the file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
 			}
 		}
 	}
 	
+	/*
+	 * Writes piggy bank data to a file at a given path
+	 * @param path of file to write to
+	 */
 	public void write(String path)
 	{
 		if (getFile(path))
