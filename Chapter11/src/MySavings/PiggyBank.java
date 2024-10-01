@@ -21,19 +21,6 @@ public class PiggyBank
 {	
 	//File to use for data storage
 	File bankFile;
-	/**
-	 * File should look like:
-	 * PENNIES_VALUE
-	 * NICKELS_VALUE
-	 * DIMES_VALUE
-	 * QUARTERS_VALUE
-	 * 
-	 * ex:
-	 * 3
-	 * 7
-	 * 2
-	 * 0
-	 */
 	
 	//DecimalFormat object
 	DecimalFormat dc = new DecimalFormat("0.00");
@@ -91,19 +78,23 @@ public class PiggyBank
 				
 				while ((line = in.readLine()) != null) //While it can read a new line
 				{
-					if (i == 0) //If the line index is 0
+					//Line 0 is the pennies title
+					if (i == 1) //If the line index is 1
 					{
 						pennies = Integer.parseInt(line); //Set number of pennies to value on line
 					}
-					else if (i == 1) //If the line index is 1
+					//Line 2 is the nickels title
+					else if (i == 3) //If the line index is 3
 					{
 						nickels = Integer.parseInt(line); //Set number of nickels to value on line
 					}
-					else if (i == 2) //If the line index is 2
+					//Line 4 is the dimes title
+					else if (i == 5) //If the line index is 5
 					{
 						dimes = Integer.parseInt(line); //Set number of dimes to value on line
 					}
-					else if (i == 3) //If the line index is 3
+					//Line 6 is the quarters title
+					else if (i == 7) //If the line index is 7
 					{
 						quarters = Integer.parseInt(line); //Set number of quarters to value on line
 					}
@@ -112,6 +103,10 @@ public class PiggyBank
 				}
 				
 				in.close(); //Close reader stream
+				
+				/*
+				 * Note: I am aware that the file lines actually start at 1 and not 0, unlike arrays. However I usually iterate starting at 0, and honestly view text files as harder to use ArrayLists, so this approach just makes more sense to me
+				 */
 			}
 			catch (Exception e) //If an exception is thrown (not found file, parseInt failed, etc)
 			{
@@ -132,15 +127,24 @@ public class PiggyBank
 			{
 				BufferedWriter out = new BufferedWriter(new FileWriter(bankFile)); //Create a writer
 				
-				out.write(Integer.toString(pennies)); //Line 0, write pennies value
+				//Line 0
+				out.write("Pennies"); //Pennies title
 				out.newLine(); //To line 1
-				out.write(Integer.toString(nickels)); //Line 1, write nickels value
+				out.write(Integer.toString(pennies)); //Pennies value
 				out.newLine(); //To line 2
-				out.write(Integer.toString(dimes)); //Line 2, write dimes value
+				out.write("Nickels"); //Nickels title
 				out.newLine(); //To line 3
-				out.write(Integer.toString(quarters)); //Line 3, write quarters value
+				out.write(Integer.toString(nickels)); //Nickels value
+				out.newLine(); //To line 4
+				out.write("Dimes"); //Dimes title
+				out.newLine(); //To line 5
+				out.write(Integer.toString(dimes)); //Dimes value
+				out.newLine(); //To line 6
+				out.write("Quarters"); //Quarters title
+				out.newLine(); //To line 7
+				out.write(Integer.toString(quarters)); //Quarters value
 				
-				out.close(); //Close writer, leaving the file with 4 lines each containing one value
+				out.close(); //Close writer
 			}
 			catch (IOException e) //Catch any issues with the writer
 			{

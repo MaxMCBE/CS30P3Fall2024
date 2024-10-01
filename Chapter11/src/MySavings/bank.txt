@@ -1,4 +1,8 @@
-7
+Pennies
+9
+Nickels
 0
-1
+Dimes
+6
+Quarters
 4
