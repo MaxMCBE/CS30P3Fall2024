@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /*
 
-Program: FindAndReplace.java          Last Date of this Revision: September 25, 2024
+Program: FindAndReplace.java          Last Date of this Revision: October 1, 2024
 
 Purpose: A program that searches a file for all instances of a target phrase, which it replaces with another if found
 
@@ -21,7 +21,7 @@ Course: Computer Science 30
 
 public class FindAndReplace 
 {
-	//Define necessary GUI elements
+	//Declare necessary GUI elements
 	private JFrame frame;
 	private JTextField filePathField;
 	private JTextField targetField;

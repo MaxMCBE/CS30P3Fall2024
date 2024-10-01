@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /*
 
-Program: WordCount.java          Last Date of this Revision: September 24, 2024
+Program: WordCount.java          Last Date of this Revision: October 1, 2024
 
 Purpose: A program that locates a text file, reads it, and counts the words and letters, outputting the number of words and average word length
 
@@ -20,7 +20,7 @@ Course: Computer Science 30
 
 public class WordCount 
 {
-	//GUI element definitions (No unnecessary ones this time)
+	//GUI element declarations (No unnecessary ones this time)
 	private JFrame frame;
 	private JTextField filePathInput;
 	private JButton countButton;

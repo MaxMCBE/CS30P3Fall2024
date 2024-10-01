@@ -3,11 +3,10 @@ package MySavings;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
 
 /*
 
-Program: MySavings.java          Last Date of this Revision: September 26, 2024
+Program: MySavings.java          Last Date of this Revision: October 1, 2024
 
 Purpose: Provides GUI for PiggyBank.java
 
@@ -19,13 +18,15 @@ Course: Computer Science 30
 
 public class MySavings 
 {
+	//Declare necessary GUI elements as instance variables
 	private JFrame frame;
 	private JLabel coinOutLabel;
 	private JLabel moneyOutLabel;
-	
-	private PiggyBank bank = new PiggyBank();
 	private JTextField filePathField;
-
+	
+	//Declare
+	private PiggyBank bank;
+	
 	public static void main(String[] args) 
 	{
 		EventQueue.invokeLater(new Runnable() 
@@ -47,6 +48,7 @@ public class MySavings
 
 	public MySavings() 
 	{
+		bank = new PiggyBank();
 		initialize();
 	}
 
@@ -80,7 +82,7 @@ public class MySavings
 		filePathPanel.add(filePathField);
 		filePathField.setColumns(10);
 		
-		moneyOutLabel = new JLabel("Total balance in bank: $0");
+		moneyOutLabel = new JLabel("Total balance in bank: $0.00");
 		moneyOutLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		coinOutput.add(moneyOutLabel);
 		
@@ -262,7 +264,7 @@ public class MySavings
 	private void update()
 	{
 		int[] coins = bank.returnCoins();
-		coinOutLabel.setText("Coins in bank: Pennies: " + coins[0] + ", Nickels: " + coins[1] + ", Dimes: " + coins[2] + ", Quarters: " + coins[3]);
+		coinOutLabel.setText("Coins in bank: " + coins[3] + " quarters, " + coins[2] + " dimes, " + coins[1] + " nickels, " + coins[0] + " pennies");
 		moneyOutLabel.setText("Total balance in bank: $" + bank.returnAmount());
 	}
 }

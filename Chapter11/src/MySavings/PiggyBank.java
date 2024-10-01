@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 
 /*
 
-Program: PiggyBank.java          Last Date of this Revision: September 26, 2024
+Program: PiggyBank.java          Last Date of this Revision: October 1, 2024
 
 Purpose: A class for use with MySavings.java that creates a PiggyBank object to store and modify data for the amount of coins in the piggy bank
 
@@ -27,6 +27,12 @@ public class PiggyBank
 	 * NICKELS_VALUE
 	 * DIMES_VALUE
 	 * QUARTERS_VALUE
+	 * 
+	 * ex:
+	 * 3
+	 * 7
+	 * 2
+	 * 0
 	 */
 	
 	//DecimalFormat object
@@ -120,23 +126,23 @@ public class PiggyBank
 	 */
 	public void write(String path)
 	{
-		if (getFile(path))
+		if (getFile(path)) //If it can successfully retrieve the file
 		{
-			try
+			try //Catch IOExceptions
 			{
-				BufferedWriter out = new BufferedWriter(new FileWriter(bankFile));
+				BufferedWriter out = new BufferedWriter(new FileWriter(bankFile)); //Create a writer
 				
-				out.write(Integer.toString(pennies));
-				out.newLine();
-				out.write(Integer.toString(nickels));
-				out.newLine();
-				out.write(Integer.toString(dimes));
-				out.newLine();
-				out.write(Integer.toString(quarters));
+				out.write(Integer.toString(pennies)); //Line 0, write pennies value
+				out.newLine(); //To line 1
+				out.write(Integer.toString(nickels)); //Line 1, write nickels value
+				out.newLine(); //To line 2
+				out.write(Integer.toString(dimes)); //Line 2, write dimes value
+				out.newLine(); //To line 3
+				out.write(Integer.toString(quarters)); //Line 3, write quarters value
 				
-				out.close();
+				out.close(); //Close writer, leaving the file with 4 lines each containing one value
 			}
-			catch (IOException e)
+			catch (IOException e) //Catch any issues with the writer
 			{
 				JOptionPane.showMessageDialog(null, "An error occured while reading the file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
 			}
@@ -156,22 +162,22 @@ public class PiggyBank
 				quarters++; //Add a quarter
 				amount -= 0.25; //Remove a quarter from the amount
 			}
-			else if (amount >= 0.10) //Repeat for other coin types
+			else if (amount >= 0.10) //If a quarter cannot be broken off but a dime can
 			{
-				dimes++;
-				amount -= 0.10;
+				dimes++; //Add a dime
+				amount -= 0.10; //Remove a dime from the amount
 			}
-			else if (amount >= 0.05)
+			else if (amount >= 0.05) //If a dime cannot be broken off but a nickel can
 			{
-				nickels++;
-				amount -= 0.05;
+				nickels++; //Add a nickel
+				amount -= 0.05; //Remove a nickel from the amount
 			}
-			else if (amount >= 0.01)
+			else if (amount >= 0.01) //If a nickel cannot be broken off but a penny can
 			{
-				pennies++;
-				amount -= 0.01;
+				pennies++; //Add a penny
+				amount -= 0.01; //Remove a penny from the amount
 			}
-			else //If there is less than 1 cent left in the amount, set it to 0 (prevent infinite loop if 0.001 is fed into the program)
+			else //If there is less than 1 cent left in the amount, set it to 0 (prevent infinite loop if 0.001 or anything else below 1 cent is fed into the program)
 			{
 				amount = 0;
 			}
@@ -197,35 +203,35 @@ public class PiggyBank
 			{
 				throw new Exception(); //Throw exception
 			}
-			//Repeat for other coin types
-			if (nickels >= n)
+			
+			if (nickels >= n) //If enough nickels exist
 			{
-				nickels -= n;
+				nickels -= n; //Remove the nickels
 			}
-			else
+			else //If they do not exist
 			{
-				throw new Exception();
+				throw new Exception(); //Throw exception
 			}
 			
-			if (dimes >= d)
+			if (dimes >= d) //If enough dimes exist
 			{
-				dimes -= d;
+				dimes -= d; //Remove the dimes
 			}
-			else
+			else //If they do not exist
 			{
-				throw new Exception();
+				throw new Exception(); //Throw exception
 			}
 				
-			if (quarters >= q)
+			if (quarters >= q) //If enough quarters exist
 			{
-				quarters -= q;
+				quarters -= q; //Remove the quarters
 			}
-			else
+			else //If they do not exist
 			{
-				throw new Exception();
+				throw new Exception(); //Throw exception
 			}
 		}
-		catch (Exception e) //Catch thrown exceptions
+		catch (Exception e) //Catch thrown exceptions (all thrown when requested coins do not exist)
 		{
 			JOptionPane.showMessageDialog(null, "Not enough coins in the piggy bank", "Insufficient balance", JOptionPane.ERROR_MESSAGE); //Error message
 		}
@@ -237,16 +243,16 @@ public class PiggyBank
 	 */
 	public int[] returnCoins()
 	{
-		int[] coins = {pennies, nickels, dimes, quarters};
-		return coins;
+		int[] coins = {pennies, nickels, dimes, quarters}; //Create an integer array containing the number of each coin type from smallest to largest value
+		return coins; //Return the array
 	}
 	
 	/*
 	 * Returns the amount of money in the bank
-	 * @return a double value calculated by adding the value of all coins in the bank
+	 * @return a string value calculated by adding the value of all coins in the bank and processing with DecimalFormat
 	 */
 	public String returnAmount()
 	{
-		return dc.format((0.25 * quarters) + (0.1 * dimes) + (0.05 * nickels) + (0.01 * pennies));
+		return dc.format((0.25 * quarters) + (0.1 * dimes) + (0.05 * nickels) + (0.01 * pennies)); //Return a formatted decimal of the total value of all coins
 	}
 }
