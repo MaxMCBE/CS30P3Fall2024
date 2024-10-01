@@ -1,9 +1,9 @@
-package MySavings;
+package MySavingsSerialization;
 
 //Imports
 import javax.swing.JOptionPane;
-import java.io.*;
 import java.text.DecimalFormat;
+import java.io.*;
 
 /*
 
@@ -17,11 +17,9 @@ Course: Computer Science 30
 
 */
 
-public class PiggyBank 
-{	
-	//File to use for data storage
-	File bankFile;
-	
+@SuppressWarnings("serial") //Yellow warning for a missing variable not mentioned in textbook, so I'm just ignoring it
+public class PiggyBank implements Serializable
+{		
 	//DecimalFormat object
 	DecimalFormat dc = new DecimalFormat("0.00");
 	
@@ -39,118 +37,6 @@ public class PiggyBank
 		nickels = 0;
 		dimes = 0;
 		quarters = 0;
-	}
-	
-	/*
-	 * Tests to see if a given file exists
-	 * @param path file path of the desired file
-	 * @return true if the file exists, false if the file does not exist
-	 */
-	public boolean getFile(String path)
-	{
-		bankFile = new File(path); //Assign the source object to a file at the inputted path
-		
-		if (bankFile.exists()) //If it exists
-		{
-			return true; //Return true, and the program continues running
-		}
-		else //If it does not exist
-		{
-			//Output an error message
-			JOptionPane.showMessageDialog(null, "File with path '" + path + "' could not be found", "File not found", JOptionPane.ERROR_MESSAGE); //Error message
-			return false; //Return false (the program will not continue running)
-		}
-	}
-	
-	/*
-	 * Reads a file at a given path for piggy bank data
-	 * @param path of file to read
-	 */
-	public void read(String path)
-	{
-		if (getFile(path)) //If file exists
-		{
-			try //Catch exceptions from the reader or from parseInt
-			{
-				String line; //Current line
-				int i = 0; //Index of current line
-				BufferedReader in = new BufferedReader(new FileReader(bankFile)); //Create a reader
-				
-				while ((line = in.readLine()) != null) //While it can read a new line
-				{
-					//Line 0 is the pennies title
-					if (i == 1) //If the line index is 1
-					{
-						pennies = Integer.parseInt(line); //Set number of pennies to value on line
-					}
-					//Line 2 is the nickels title
-					else if (i == 3) //If the line index is 3
-					{
-						nickels = Integer.parseInt(line); //Set number of nickels to value on line
-					}
-					//Line 4 is the dimes title
-					else if (i == 5) //If the line index is 5
-					{
-						dimes = Integer.parseInt(line); //Set number of dimes to value on line
-					}
-					//Line 6 is the quarters title
-					else if (i == 7) //If the line index is 7
-					{
-						quarters = Integer.parseInt(line); //Set number of quarters to value on line
-					}
-					
-					i++; //Increment index
-				}
-				
-				in.close(); //Close reader stream
-				
-				/*
-				 * Note: I am aware that the file lines actually start at 1 and not 0, unlike arrays. However I usually iterate starting at 0, and honestly view text files as harder to use ArrayLists, so this approach just makes more sense to me
-				 */
-			}
-			catch (Exception e) //If an exception is thrown (not found file, parseInt failed, etc)
-			{
-				JOptionPane.showMessageDialog(null, "An error occured while reading the file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
-			}
-		}
-	}
-	
-	/*
-	 * Writes piggy bank data to a file at a given path
-	 * @param path of file to write to
-	 */
-	public void write(String path)
-	{
-		if (getFile(path)) //If it can successfully retrieve the file
-		{
-			try //Catch IOExceptions
-			{
-				BufferedWriter out = new BufferedWriter(new FileWriter(bankFile)); //Create a writer
-				
-				//Line 0
-				out.write("Pennies"); //Pennies title
-				out.newLine(); //To line 1
-				out.write(Integer.toString(pennies)); //Pennies value
-				out.newLine(); //To line 2
-				out.write("Nickels"); //Nickels title
-				out.newLine(); //To line 3
-				out.write(Integer.toString(nickels)); //Nickels value
-				out.newLine(); //To line 4
-				out.write("Dimes"); //Dimes title
-				out.newLine(); //To line 5
-				out.write(Integer.toString(dimes)); //Dimes value
-				out.newLine(); //To line 6
-				out.write("Quarters"); //Quarters title
-				out.newLine(); //To line 7
-				out.write(Integer.toString(quarters)); //Quarters value
-				
-				out.close(); //Close writer
-			}
-			catch (IOException e) //Catch any issues with the writer
-			{
-				JOptionPane.showMessageDialog(null, "An error occured while writing the file", "Error", JOptionPane.ERROR_MESSAGE); //Error message
-			}
-		}
 	}
 	
 	/*
