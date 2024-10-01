@@ -243,3 +243,5 @@ public class FindAndReplace
 		}
 	}
 }
+
+//Screen Dumps: N/A, no console output for GUI programs

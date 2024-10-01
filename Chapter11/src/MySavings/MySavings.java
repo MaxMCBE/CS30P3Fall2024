@@ -299,3 +299,5 @@ public class MySavings
 		moneyOutLabel.setText("Total balance in bank: $" + bank.returnAmount()); //Set the total balance output to the total value in the bank
 	}
 }
+
+//Screen Dumps: N/A, no console output for GUI programs

@@ -191,3 +191,5 @@ public class WordCount
 		}
 	}
 }
+
+//Screen Dumps: N/A, no console output for GUI programs
