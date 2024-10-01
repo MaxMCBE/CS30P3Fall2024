@@ -98,6 +98,7 @@ public class MySavings
 		
 		//Button to save data to file
 		JButton saveToFile = new JButton("Save data to file");
+		saveToFile.setBackground(new Color(255, 255, 255));
 		saveToFile.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -111,6 +112,7 @@ public class MySavings
 		
 		//Button to load data from file
 		JButton loadFile = new JButton("Load data from file");
+		loadFile.setBackground(new Color(255, 255, 255));
 		loadFile.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -228,6 +230,7 @@ public class MySavings
 		
 		//Button to deposit a custom amount of money in largest coins
 		JButton depositCustom = new JButton("Deposit custom amount");
+		depositCustom.setBackground(new Color(255, 255, 255));
 		depositCustom.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -252,6 +255,7 @@ public class MySavings
 		frame.getContentPane().add(depositCustom);
 		
 		JButton withdrawCustom = new JButton("Withdraw custom amount");
+		withdrawCustom.setBackground(new Color(255, 255, 255));
 		withdrawCustom.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
