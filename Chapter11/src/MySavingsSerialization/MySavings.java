@@ -337,7 +337,7 @@ public class MySavings
 			{
 				ObjectInputStream in = new ObjectInputStream(new FileInputStream(bankFile)); //Create a reader
 				
-				bank = (PiggyBank) in.readObject(); 
+				bank = (PiggyBank) in.readObject(); //Set the bank object to the serialized object on the file
 				
 				in.close(); //Close reader stream
 			}
@@ -360,7 +360,7 @@ public class MySavings
 			{
 				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(bankFile)); //Create a writer
 				
-				out.writeObject(bank);
+				out.writeObject(bank); //Write the serialized bank object onto the file
 				
 				out.close(); //Close writer
 			}
