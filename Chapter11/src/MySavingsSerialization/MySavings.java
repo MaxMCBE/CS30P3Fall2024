@@ -7,9 +7,9 @@ import java.io.*;
 
 /*
 
-Program: MySavings.java          Last Date of this Revision: October 1, 2024
+Program: MySavings.java          Last Date of this Revision: October 2, 2024
 
-Purpose: Provides GUI for PiggyBank.java
+Purpose: Provides GUI for PiggyBank.java, and this version uses a serialized object on the file instead of regular strings
 
 Author: Max MacPhee 
 School: CHHS
