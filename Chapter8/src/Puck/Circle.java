@@ -1,6 +1,6 @@
 package Puck;
 
-public class Circle 
+public class Circle implements Comparable<Object>
 {
 	private static final double PI = 3.14159265359;
 	private double radius;
@@ -43,11 +43,13 @@ public class Circle
 	
 	/*
 	 * determines if the object is equal to another object using radius
-	 * @param c circle to compare to
+	 * @param o object to compare to
 	 * @return true if radii match, false if not
 	 */
-	public boolean equals(Circle c)
+	public boolean equals(Object o)
 	{
+		Circle c = (Circle) o;
+		
 		if (c.getRadius() == radius)
 		{
 			return true;
@@ -55,6 +57,29 @@ public class Circle
 		else
 		{
 			return false;
+		}
+	}
+
+	/*
+	 * uses the Comparable interface to compare two circles by radius
+	 * @param o object to compare to
+	 * @return -1 if the object is smaller than o, 0 if they are equal, 1 if the object is larger than o
+	 */
+	public int compareTo(Object o) 
+	{
+		Circle c = (Circle) o;
+		
+		if (radius < c.getRadius())
+		{
+			return -1;
+		}
+		else if (radius == c.getRadius())
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
 		}
 	}
 }

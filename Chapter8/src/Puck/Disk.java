@@ -1,6 +1,6 @@
 package Puck;
 
-public class Disk extends Circle 
+public class Disk extends Circle implements Comparable<Object>
 {
 	private double thickness;
 	
@@ -44,11 +44,13 @@ public class Disk extends Circle
 	
 	/*
 	 * compares the disk object to another
-	 * @param d disk object to compare to
+	 * @param o object to compare to
 	 * @return true if disks match, false if not
 	 */
-	public boolean equals(Disk d)
+	public boolean equals(Object o)
 	{
+		Disk d = (Disk) o;
+		
 		if (d.getRadius() == super.getRadius() && d.getThickness() == thickness)
 		{
 			return true;
@@ -56,6 +58,29 @@ public class Disk extends Circle
 		else
 		{
 			return false;
+		}
+	}
+	
+	/*
+	 * uses the Comparable interface to compare two disks by volume
+	 * @param o object to compare to
+	 * @return -1 if the object is smaller than o, 0 if they are equal, 1 if the object is larger than o
+	 */
+	public int compareTo(Object o) 
+	{
+		Disk d = (Disk) o;
+		
+		if (calcVolume() < d.calcVolume())
+		{
+			return -1;
+		}
+		else if (calcVolume() == d.calcVolume())
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
 		}
 	}
 }
