@@ -19,4 +19,9 @@ public class Staff extends UEmployee
 	{
 		jobName = j;
 	}
+	
+	public String toString()
+	{
+		return (super.getName() + " with job " + getJobName() + " earns " + super.getSalary());
+	}
 }

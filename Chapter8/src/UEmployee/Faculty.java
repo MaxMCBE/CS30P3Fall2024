@@ -19,4 +19,9 @@ public class Faculty extends UEmployee
 	{
 		deptName = d;
 	}
+	
+	public String toString()
+	{
+		return (super.getName() + " in department " + getDeptName() + " earns " + super.getSalary());
+	}
 }
