@@ -1,6 +1,6 @@
 package UEmployee;
 
-public class UEmployee 
+public abstract class UEmployee 
 {
 	private String name;
 	private int salary;
