@@ -4,7 +4,7 @@ package Vehicle;
 
 Program: testClass.java          Last Date of this Revision: November 5, 2024
 
-Purpose: Runs the Vehicle subclasses. Again, I know nothing about vehicles so this is effectively gibberish.
+Purpose: Runs the Vehicle subclasses as demonstration. Again, I know nothing about vehicles so this is effectively gibberish.
 
 Author: Max MacPhee 
 School: CHHS
