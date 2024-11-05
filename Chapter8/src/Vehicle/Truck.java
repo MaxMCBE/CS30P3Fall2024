@@ -71,4 +71,13 @@ public class Truck extends Vehicle
 	{
 		System.out.println("Truck is parked"); //Truck specific parking message
 	}
+	
+	/*
+	 * Returns object as a String
+	 * @return object data converted to a String
+	 */
+	public String toString()
+	{
+		return "Truck has: \nCity fuel economy: " + super.getFuelEconomyCity() + "\nHighway fuel economy: " + super.getFuelEconomyHwy() + "\nSeating capacity: " + super.getSeatingCapacity() + "\nCargo volume: " + super.getCargoVolume() + "\nTruck variable: " + getTruckVariable();
+	}
 }

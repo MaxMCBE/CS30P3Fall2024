@@ -71,4 +71,13 @@ public class Minivan extends Vehicle
 	{
 		System.out.println("Minivan is parked"); //Minivan specific parking message
 	}
+	
+	/*
+	 * Returns object as a String
+	 * @return object data converted to a String
+	 */
+	public String toString()
+	{
+		return "Minivan has: \nCity fuel economy: " + super.getFuelEconomyCity() + "\nHighway fuel economy: " + super.getFuelEconomyHwy() + "\nSeating capacity: " + super.getSeatingCapacity() + "\nCargo volume: " + super.getCargoVolume() + "\nMinivan variable: " + getMinivanVariable();
+	}
 }
