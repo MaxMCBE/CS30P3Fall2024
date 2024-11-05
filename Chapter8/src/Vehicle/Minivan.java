@@ -20,6 +20,11 @@ public class Minivan extends Vehicle
 		minivanVariable = x;
 	}
 	
+	public void minivanMethod()
+	{
+		System.out.println("Doing minivan things");
+	}
+	
 	public void drive() 
 	{
 		System.out.println("Minivan is driving");

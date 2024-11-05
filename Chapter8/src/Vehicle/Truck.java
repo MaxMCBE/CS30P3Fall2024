@@ -20,6 +20,11 @@ public class Truck extends Vehicle
 		truckVariable = x;
 	}
 	
+	public void truckMethod()
+	{
+		System.out.println("Doing truck things");
+	}
+	
 	public void drive() 
 	{
 		System.out.println("Truck is driving");

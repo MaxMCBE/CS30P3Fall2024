@@ -20,6 +20,11 @@ public class Car extends Vehicle
 		carVariable = x;
 	}
 	
+	public void carMethod()
+	{
+		System.out.println("Doing car things");
+	}
+	
 	public void drive() 
 	{
 		System.out.println("Car is driving");
