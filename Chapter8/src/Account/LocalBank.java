@@ -176,7 +176,7 @@ public class LocalBank
 							if (bank.accounts.get(idInput.getText()) == null) //If there is no account with the requested ID
 							{
 								boolean business = false;
-								if (JOptionPane.showConfirmDialog(null, "Would you like to create a business account? (Click NO for personal account)", "Account Creation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+								if (JOptionPane.showConfirmDialog(null, "Would you like to create a business account (Minimum balance $500)? (Click NO for personal account (Minimum balance $100)", "Account Creation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
 								{
 									business = true;
 								}
