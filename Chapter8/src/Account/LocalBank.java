@@ -10,6 +10,7 @@ import java.awt.event.*;
 Program: LocalBank.java          Last Date of this Revision: November 6, 2024
 
 Purpose: Creates and manages GUI using Bank.java and subclasses of Account.java to make a basic bank manager interface as specified in the textbook with modifications to user experience and the addition of PINs
+Note: Project reused from Chapter 10 for Chapter 8 variant, as opposed to the regular console-based code supplied in D2L
 
 Author: Max MacPhee 
 School: CHHS
