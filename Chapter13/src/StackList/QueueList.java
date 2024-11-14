@@ -2,9 +2,9 @@ package StackList;
 
 /*
 
-Program: StackList.java          Last Date of this Revision: November 14, 2024
+Program: QueueList.java          Last Date of this Revision: November 14, 2024
 
-Purpose: Class that implements a stack using a linked list (using Node.java)
+Purpose: Class that implements a queue using a linked list (using Node.java). Reuses a fair amount of code from StackList as they both use linked lists
 
 Author: Max MacPhee 
 School: CHHS
@@ -12,23 +12,23 @@ Course: Computer Science 30
  
 */
 
-public class StackList 
+public class QueueList 
 {
 	private Node head; //The class always has a head node (in the stack context, this is the top of the stack)
 	
 	/*
 	 * Constructor
 	 */
-	public StackList()
+	public QueueList()
 	{
 		head = null; //Start with a null head, as it is empty
 	}
 	
 	/*
-	 * Returns the top item in the stack
-	 * @return The data stored in the head (top) node
+	 * Returns the front item in the queue
+	 * @return The data stored in the head (front) node
 	 */
-	public Object top()
+	public Object front()
 	{
 		if (head != null) //If the head exists
 		{
@@ -41,21 +41,10 @@ public class StackList
 	}
 	
 	/*
-	 * Adds a new item to the top of the stack
-	 * @param o Object to add to the stack
+	 * Removes the item at the front of the queue
+	 * @return The data stored in the head (front) node
 	 */
-	public void push(Object o)
-	{
-		Node n = new Node(o); //Create a new node with the data from the parameter
-		n.setNext(head); //Set the new node's follower to the current head node
-		head = n; //Set the new node as the head/top of the list/stack
-	}
-	
-	/*
-	 * Removes the item at the top of the stack
-	 * @return The data stored in the head (top) node
-	 */
-	public Object pop()
+	public Object dequeue()
 	{
 		Node n = head; //Node n is the current head
 		
@@ -71,23 +60,47 @@ public class StackList
 	}
 	
 	/*
-	 * Tests if the stack is empty
-	 * @return True if the stack is empty, false if not
+	 * Adds a new item to the back of the queue
+	 * @param o Data to store in the new end node
+	 */
+	public void enqueue(Object o)
+	{
+		Node n = head; //Current node (starts at head)
+		Node n1 = new Node(o); //New node to add to the queue
+		
+		if (n != null) //If the head is not null
+		{
+			while (n.getNext() != null) //While there is a new node after the current one
+			{
+				n = n.getNext(); //Set the current node to the following one
+			}
+			//When there is NO following node attached to the current one
+			n.setNext(n1); //Attach the new node to the end of the current node
+		}
+		else //If the head is null (queue is empty)
+		{
+			head = n1; //Set the head to the new node
+		}
+	}
+	
+	/*
+	 * Tests if the queue is empty
+	 * @return True if the queue is empty, false if not
 	 */
 	public boolean isEmpty()
 	{
-		if (head == null) //If the head node is null (there are no nodes in the list/stack to hold data)
+		if (head == null) //If the head node is null (there are no nodes in the list/queue to hold data)
 		{
 			return true; //Return true
 		}
-		else //If a head node exists (there are nodes in the list/stack to hold data)
+		else //If a head node exists (there are nodes in the list/queue to hold data)
 		{
 			return false; //Return false
 		}
 	}
 	
 	/*
-	 * Returns the number of items (nodes) in the stack (list)
+	 * Returns the number of items (nodes) in the queue (list)
 	 * @return The total number of items
 	 */
 	public int size()
