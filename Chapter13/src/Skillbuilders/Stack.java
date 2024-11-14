@@ -30,7 +30,7 @@ public class Stack
 		}
 	}
 	
-	public void push (Object x)
+	public void push(Object x)
 	{
 		data.add(x);
 	}
