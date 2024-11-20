@@ -54,7 +54,7 @@ public class Challenge
             	//Turn around
                 leftMotors.setTargetVelocity(0.5);
                 rightMotors.setTargetVelocity(-0.5);
-                Thread.sleep(1200);
+                Thread.sleep(1200); //Time to wait found through trial and error
                 //Reverse turn direction (so it maintains the same path)
                 turnDirection *= -1;
                 //Set the new i to however much was left - reversing the start and end
@@ -75,7 +75,7 @@ public class Challenge
             	//Turn 90 degrees (direction depends on turnDirection variable)
             	leftMotors.setTargetVelocity(0.5*turnDirection);
                 rightMotors.setTargetVelocity(-0.5*turnDirection);
-                Thread.sleep(625);
+                Thread.sleep(625); //Time to wait found through trial and error
                 //Restart the loop
             }
         }
