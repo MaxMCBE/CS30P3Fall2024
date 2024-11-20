@@ -39,7 +39,7 @@ public class Challenge
 		rightMotors.open(1000);
 		sonar.open(1000);
 		
-		//Immediately set acceleration to maximum
+		//Immediately set acceleration to maximum to help prevent drift (I read ahead and found out how to do this early)
 		leftMotors.setAcceleration(leftMotors.getMaxAcceleration());
         rightMotors.setAcceleration(rightMotors.getMaxAcceleration());
 		
