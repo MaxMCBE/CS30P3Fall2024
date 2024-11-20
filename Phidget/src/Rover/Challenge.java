@@ -2,7 +2,7 @@ package Rover;
 
 /*
 
-Program: Challenge.java          Last Date of this Revision: November 19, 2024
+Program: Challenge.java          Last Date of this Revision: November 20, 2024
 
 Purpose: Moves the Phidget rover in a square pattern, and reverses direction if it runs into an obstacle
 
