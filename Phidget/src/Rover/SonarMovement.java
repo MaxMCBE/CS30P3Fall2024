@@ -15,7 +15,7 @@ Course: Computer Science 30
 //Add Phidgets Library
 import com.phidget22.*;
 
-public class RoverMovementSonar 
+public class SonarMovement 
 {
 	public static void main(String[] args) throws Exception 
 	{
