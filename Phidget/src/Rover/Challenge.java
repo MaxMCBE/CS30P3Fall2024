@@ -44,7 +44,7 @@ public class Challenge
         rightMotors.setAcceleration(rightMotors.getMaxAcceleration());
 		
 		int i = 0; //Variable to tell how long the rover has been driving
-		final int GOAL = 10; //Goal for how long it should drive (10 cycles, or 1000ms/1s)
+		final int GOAL = 20; //Goal for how long it should drive (20 cycles, or 2000ms/2s)
 		int turnDirection = 1; //Direction to turn (1 or -1, which is used to multiply the velocity of each motor)
 		
 		while (true) //Infinite loop
