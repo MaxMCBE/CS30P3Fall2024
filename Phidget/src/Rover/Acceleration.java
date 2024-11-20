@@ -4,7 +4,7 @@ package Rover;
 
 Program: Acceleration.java          Last Date of this Revision: November 20, 2024
 
-Purpose: Moves the rover with maximum acceleration. This code is taken directly from the tutorial because they have no suggested or requested changes, but I still wanted to put it here as this lesson is required. Unique acceleration code can be found in Challenge.java
+Purpose: Moves the rover with maximum acceleration. This code is taken directly from the tutorial (values modified) because they have no suggested or requested changes, but I still wanted to put it here as this lesson is required. Unique acceleration code can be found in Challenge.java
 
 Author: Max MacPhee 
 School: CHHS
@@ -33,23 +33,23 @@ public class Acceleration
         rightMotors.setChannel(1);
 
         //Open
-        leftMotors.open(5000);
-        rightMotors.open(5000);
+        leftMotors.open(1000);
+        rightMotors.open(1000);
 
         //Increase acceleration
         leftMotors.setAcceleration(leftMotors.getMaxAcceleration());
         rightMotors.setAcceleration(rightMotors.getMaxAcceleration());
 
         //Move forward at full speed
-        leftMotors.setTargetVelocity(1);
-        rightMotors.setTargetVelocity(1);
+        leftMotors.setTargetVelocity(-0.25);
+        rightMotors.setTargetVelocity(-0.25);
 
         //Wait for 1 second
         Thread.sleep(1000);
 
         //Reverse at full speed
-        leftMotors.setTargetVelocity(-1);
-        rightMotors.setTargetVelocity(-1);
+        leftMotors.setTargetVelocity(0.25);
+        rightMotors.setTargetVelocity(0.25);
 
         //Wait for 1 second
         Thread.sleep(1000);
