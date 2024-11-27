@@ -86,7 +86,7 @@ public class RFIDTest
 				
 				try 
 				{
-					digitalOutput2.setDutyCycle(0);
+					digitalOutput2.setDutyCycle(0); //Set LED to false state
 				} 
 				catch (PhidgetException e1) 
 				{
