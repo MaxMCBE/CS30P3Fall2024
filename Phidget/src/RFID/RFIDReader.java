@@ -4,7 +4,7 @@ package RFID;
 
 Program: RFIDTest.java          Last Date of this Revision: November 27, 2024
 
-Purpose: Reads RFID tags and returns their name from data.txt if the tag is logged
+Purpose: Reads RFID tags and returns their name from data.txt if the tag is logged, otherwise it allows the user to add the tag to the file
 Very easy to modify the program to store a third (or more) value for if the object is logged in or out, for example, using another colon to break up the string
 
 Author: Max MacPhee 
