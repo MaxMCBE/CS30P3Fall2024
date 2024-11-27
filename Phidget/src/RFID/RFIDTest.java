@@ -5,7 +5,7 @@ package RFID;
 Program: RFIDTest.java          Last Date of this Revision: November 27, 2024
 
 Purpose: Reads RFID tags and returns their name from data.txt if the tag is logged
-Very easy to modify to add a writer to add items to the database, or a third value for if the object is logged in or out, for example, using another colon to break up the string
+Very easy to modify the program to store a third (or more) value for if the object is logged in or out, for example, using another colon to break up the string
 
 Author: Max MacPhee 
 School: CHHS
@@ -46,6 +46,37 @@ public class RFIDTest
 		in.close();
 	}
 	
+	//Write new item to file
+	public static void writeFile(File f, String tag) throws Exception
+	{
+		//Writer
+		BufferedWriter out = new BufferedWriter(new FileWriter(f, true)); //True means it appends to the end of the file
+		//Scanner
+		Scanner in = new Scanner(System.in);
+		
+		//Get input
+		System.out.println("Enter name of tag:");
+		String name = in.nextLine();
+		
+		if (name.indexOf(":") != -1) //If the input contains no colons
+		{
+			out.write((tag + ":" + name));
+			
+			System.out.println("Tag '" + tag + "' added to file with name '" + name +"'\n");
+		}
+		else //If the input contains a colon (may break everything, especially if more data is added)
+		{
+			System.out.println("Name cannot contain ':'\n"); //Error message
+		}
+		
+		//Close writer and scanner
+		out.close();
+		in.close();
+		
+		//Update array to new data file
+		readFile(f);
+	}
+	
 	public static void main(String[] args) throws Exception 
 	{
 		//Define Phidgets
@@ -71,6 +102,34 @@ public class RFIDTest
 				else //Otherwise, print unknown
 				{
 					System.out.println("Found unknown tag");
+					
+					//Ask the user if they want to add the tag to the file
+					System.out.println("Would you like to add tag to file? Y or N:");
+					try //Catch input issues
+					{
+						Scanner in = new Scanner(System.in); //Create scanner
+						
+						String input = in.nextLine(); //Get input
+						
+						in.close(); //Close scanner
+						
+						if ((input.toLowerCase()).equals("y")) //If yes
+						{
+							writeFile(DATA_FILE, e.getTag()); //Call writeFile() with the data file and current tag
+						}
+						else if ((input.toLowerCase()).equals("n")) //If no
+						{
+							System.out.println("Confirmed\n"); //Confirmation message
+						}
+						else //If neither
+						{
+							throw new Exception(); //Throw exception
+						}
+					}
+					catch (Exception e1) //If anything goes wrong
+					{
+						System.out.println("Invalid entry\n"); //Error message
+					}
 				}
 				
 				System.out.println("\n"); //Spacer to make output nicer
