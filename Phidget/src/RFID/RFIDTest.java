@@ -5,6 +5,7 @@ package RFID;
 Program: RFIDTest.java          Last Date of this Revision: November 27, 2024
 
 Purpose: Reads RFID tags and returns their name from data.txt if the tag is logged
+Very easy to modify to add a writer to add items to the database, or a third value for if the object is logged in or out, for example, using another colon to break up the string
 
 Author: Max MacPhee 
 School: CHHS
@@ -101,9 +102,9 @@ public class RFIDTest
 		
 		while ((line = in.readLine()) != null) //While the next line is NOT null
 		{
-			int indexSemicolon = line.indexOf(':'); //Find the semicolon (divides tag and name)
-			String tag = line.substring(0, indexSemicolon); //Isolate the tag part
-			String name = line.substring(indexSemicolon+1); //Isolate the name part
+			int colonIndex = line.indexOf(':'); //Find the semicolon (divides tag and name)
+			String tag = line.substring(0, colonIndex); //Isolate the tag part
+			String name = line.substring(colonIndex+1); //Isolate the name part
 			
 			data.put(tag, name); //Add the tag/name pair to the data HashMap
 		}
