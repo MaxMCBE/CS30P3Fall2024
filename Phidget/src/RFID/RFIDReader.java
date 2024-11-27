@@ -63,6 +63,8 @@ public class RFIDReader
 			out.write((tag + ":" + name));
 			
 			System.out.println("Tag '" + tag + "' added to file with name '" + name +"'\n");
+			
+			data.put(tag, name); //Add to the data HashMap (I used to just call readFile, but that requires reloading everything else as well so it's extremely inefficient
 		}
 		else //If the input contains a colon (may break everything, especially if more data is added)
 		{
@@ -72,9 +74,6 @@ public class RFIDReader
 		//Close writer and scanner
 		out.close();
 		in.close();
-		
-		//Update array to new data file
-		readFile(f);
 	}
 	
 	public static void main(String[] args) throws Exception 
