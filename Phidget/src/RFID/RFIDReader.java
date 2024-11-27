@@ -17,7 +17,7 @@ import java.io.*;
 import java.util.*;
 import com.phidget22.*;
 
-public class RFIDTest 
+public class RFIDReader 
 {
 	//Data HashMap containing tag/name pairs
 	static HashMap<String, String> data = new HashMap<String, String>();
