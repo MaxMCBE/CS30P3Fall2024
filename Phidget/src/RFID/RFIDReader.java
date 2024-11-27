@@ -32,7 +32,7 @@ public class RFIDReader
 		BufferedReader in = new BufferedReader(new FileReader(f));
 		String line = ""; //Current line
 		
-		data.clear();
+		data.clear(); //Empty the HashMap before refilling it
 		
 		while ((line = in.readLine()) != null) //While the next line is NOT null
 		{
@@ -43,7 +43,7 @@ public class RFIDReader
 			data.put(tag, name); //Add the tag/name pair to the data HashMap
 		}
 		
-		in.close();
+		in.close(); //Close scanner
 	}
 	
 	//Write new item to file
