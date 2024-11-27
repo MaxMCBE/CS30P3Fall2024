@@ -25,6 +25,27 @@ public class RFIDTest
 	//File containing tag/name data
 	final static File DATA_FILE = new File("src//RFID//data.txt");
 	
+	//Reads the file and builds the HashMap
+	public static void readFile(File f) throws Exception
+	{
+		//Reader
+		BufferedReader in = new BufferedReader(new FileReader(f));
+		String line = ""; //Current line
+		
+		data.clear();
+		
+		while ((line = in.readLine()) != null) //While the next line is NOT null
+		{
+			int colonIndex = line.indexOf(':'); //Find the semicolon (divides tag and name)
+			String tag = line.substring(0, colonIndex); //Isolate the tag part
+			String name = line.substring(colonIndex+1); //Isolate the name part
+			
+			data.put(tag, name); //Add the tag/name pair to the data HashMap
+		}
+		
+		in.close();
+	}
+	
 	public static void main(String[] args) throws Exception 
 	{
 		//Define Phidgets
@@ -96,20 +117,7 @@ public class RFIDTest
 			}
 		});
 		
-		//Reader
-		BufferedReader in = new BufferedReader(new FileReader(DATA_FILE));
-		String line = ""; //Current line
-		
-		while ((line = in.readLine()) != null) //While the next line is NOT null
-		{
-			int colonIndex = line.indexOf(':'); //Find the semicolon (divides tag and name)
-			String tag = line.substring(0, colonIndex); //Isolate the tag part
-			String name = line.substring(colonIndex+1); //Isolate the name part
-			
-			data.put(tag, name); //Add the tag/name pair to the data HashMap
-		}
-		
-		in.close(); //Close the reader
+		readFile(DATA_FILE); //Reads the file and builds the HashMap
 
 		//Open Phidgets
 		rfid0.open(1000);
