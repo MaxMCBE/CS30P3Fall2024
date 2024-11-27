@@ -32,7 +32,7 @@ public class RFIDReader
 		BufferedReader in = new BufferedReader(new FileReader(f));
 		String line = ""; //Current line
 		
-		data.clear(); //Empty the HashMap before refilling it
+		data.clear(); //Empty the HashMap before filling it, just to make sure it doesnt all implode
 		
 		while ((line = in.readLine()) != null) //While the next line is NOT null
 		{
